@@ -24,11 +24,11 @@ adc = Adafruit_ADS1x15.ADS1015()
 GAIN = 2
 
 
-def startMotor:
+def startMotor():
     GPIO.output(motor1, GPIO.HIGH)
     print("Starting motor...")
 
-def stopMotor:
+def stopMotor():
     GPIO.output(motor1, GPIO.LOW)
     print("Stopping motor...")
 
@@ -49,7 +49,7 @@ while(1):
             currentSpeed = currentSpeed + 5
 
         speedControl.ChangeDutyCycle(currentSpeed)
-        print("Speed:" +currentSpeed)
+        print("Speed:" +str(currentSpeed))
         x='z'
 
     elif x=='d':
@@ -57,7 +57,7 @@ while(1):
             currentSpeed = currentSpeed - 5
 
         speedControl.ChangeDutyCycle(currentSpeed)
-        print("Speed:" +currentSpeed)
+        print("Speed:" +str(currentSpeed))
         x='z'
 
     elif x=='r':
