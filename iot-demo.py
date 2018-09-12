@@ -2,6 +2,7 @@ import sys
 import time
 import Adafruit_ADS1x15
 import RPi.GPIO as GPIO
+from simple_pid import PID
 
 
 #Motor setup
@@ -22,6 +23,11 @@ speedControl.start(currentSpeed)
 #Anemo setup
 adc = Adafruit_ADS1x15.ADS1015()
 GAIN = 2
+
+#PID setup
+pid = PID(1, 0.1, 0.05, setpoint=450)
+pid.sample_time = 1
+pid.output_limits = (30, 90)
 
 
 def startMotor():
@@ -69,3 +75,7 @@ while(1):
         GPIO.cleanup()
         print("Exit")
         break
+
+    windSpeed = adc.read_adc(0, gain=GAIN)
+    control = pid(windSpeed)
+    print(control)
