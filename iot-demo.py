@@ -68,14 +68,13 @@ while(1):
 
     elif x=='r':
         value = adc.read_adc(0, gain=GAIN)
-        print(value)
+
+        control = pid(value)
+        print("Windspeed: "+str(value))
+        print("Control: "+str(control))
         x='z'
 
     elif x=='e':
         GPIO.cleanup()
         print("Exit")
         break
-
-    windSpeed = adc.read_adc(0, gain=GAIN)
-    control = pid(windSpeed)
-    print(control)
