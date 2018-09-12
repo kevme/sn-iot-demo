@@ -7,8 +7,8 @@ import RPi.GPIO as GPIO
 #Motor setup
 motor1=24
 motor2=23
-motorSpeed = 25
-currentSpeed = 25
+motorSpeed = 18
+currentSpeed = 30
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(motor1, GPIO.OUT)
