@@ -16,7 +16,7 @@ GPIO.setup(motor2, GPIO.OUT)
 GPIO.setup(motorSpeed, GPIO.OUT)
 GPIO.output(motor1, GPIO.LOW)
 GPIO.output(motor2, GPIO.LOW)
-speedControl=GPIO.PWM(motorSpeed,1000)
+speedControl=GPIO.PWM(motorSpeed,100)
 speedControl.start(currentSpeed)
 
 #Anemo setup
