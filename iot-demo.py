@@ -55,6 +55,7 @@ def stopMotor():
     GPIO.output(motor1, GPIO.LOW)
     print("Stopping motor...")
 
+#Calculate when one minute passed
 oldEpoche = time.time()
 
 def minutePassed():
@@ -66,6 +67,7 @@ def minutePassed():
 
     return False
 
+#variables for while loop
 switch1On = False
 pid.auto_mode = False
 
@@ -81,9 +83,6 @@ def mean(valueArray):
     return float(sum(valueArray)) / max(len(valueArray),1)
 
 while(1):
-    #x=input()
-    x='z'
-    
     if GPIO.input(switch1) == GPIO.HIGH and switch1On == False:
         print("switch 1 on")
         switch1On = True
@@ -96,57 +95,18 @@ while(1):
         pid.auto_mode = False
         stopMotor()
 
-
-    if x=='f':
-        startMotor()
-        x='z'
-
-    elif x=='s':
-        stopMotor()
-        x='z'
-
-    elif x=='u':
-        if currentSpeed < 95:
-            currentSpeed = currentSpeed + 5
-
-        speedControl.ChangeDutyCycle(currentSpeed)
-        print("Speed:" +str(currentSpeed))
-        x='z'
-
-    elif x=='d':
-        if currentSpeed > 20:
-            currentSpeed = currentSpeed - 5
-
-        speedControl.ChangeDutyCycle(currentSpeed)
-        print("Speed:" +str(currentSpeed))
-        x='z'
-
-    elif x=='r':
-        value = adc.read_adc(0, gain=GAIN)
-
-        control = pid(value)
-        print("Windspeed: "+str(value))
-        print("Control: "+str(control))
-        x='z'
-
-    elif x=='e':
-        GPIO.cleanup()
-        print("Exit")
-        break
-    
-    
     if switch1On == True:
         value = adc.read_adc(0, gain=GAIN)
         valueArray.append(value)
         avg = mean(valueArray)
-        
+
         if len(valueArray) == numberOfReadings:
             valueArray.pop(0)
 
-        
+
         control = pid(value)
         speedControl.ChangeDutyCycle(control)
-    
+
     if minutePassed():
         print(avg)
         print("Minute passed")
