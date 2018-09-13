@@ -112,29 +112,29 @@ while(1):
             motorValueArray.pop(0)
         speedControl.ChangeDutyCycle(control)
 
-    if minutePassed():
-        print("Wind: "+str(windAvg))
-        print("Motor: "+str(motorAvg))
-        print("Minute passed")
-        currentDateTime = datetime.datetime.now().replace(microsecond=0).isoformat()
-        windData = '''{"seriesRef":
-            {"subject":"1a8ed349dba46b00c58f7a6eaf9619e1",
-                    "table":"x_snc_ma_maint_u_cmdb_ci_machine",
-                    "metric":"wind_speed"},
-            "values":[
-                    {"timestamp":"'''+str(currentDateTime)+'''Z", "value":'''+str(windAvg)+'''}
-                    ]
-            }'''
-        resp = requests.post(url, data=windData, headers=headers, auth=('iot_demo', 'SNIoT1234'))
+        if minutePassed():
+            print("Wind: "+str(windAvg))
+            print("Motor: "+str(motorAvg))
+            print("Minute passed")
+            currentDateTime = datetime.datetime.now().replace(microsecond=0).isoformat()
+            windData = '''{"seriesRef":
+                {"subject":"1a8ed349dba46b00c58f7a6eaf9619e1",
+                        "table":"x_snc_ma_maint_u_cmdb_ci_machine",
+                        "metric":"wind_speed"},
+                "values":[
+                        {"timestamp":"'''+str(currentDateTime)+'''Z", "value":'''+str(windAvg)+'''}
+                        ]
+                }'''
+            resp = requests.post(url, data=windData, headers=headers, auth=('iot_demo', 'SNIoT1234'))
 
-        windData = '''{"seriesRef":
-            {"subject":"1a8ed349dba46b00c58f7a6eaf9619e1",
-                    "table":"x_snc_ma_maint_u_cmdb_ci_machine",
-                    "metric":"motor_speed"},
-            "values":[
-                    {"timestamp":"'''+str(currentDateTime)+'''Z", "value":'''+str(motorAvg)+'''}
-                    ]
-            }'''
-        resp = requests.post(url, data=windData, headers=headers, auth=('iot_demo', 'SNIoT1234'))
+            windData = '''{"seriesRef":
+                {"subject":"1a8ed349dba46b00c58f7a6eaf9619e1",
+                        "table":"x_snc_ma_maint_u_cmdb_ci_machine",
+                        "metric":"motor_speed"},
+                "values":[
+                        {"timestamp":"'''+str(currentDateTime)+'''Z", "value":'''+str(motorAvg)+'''}
+                        ]
+                }'''
+            resp = requests.post(url, data=windData, headers=headers, auth=('iot_demo', 'SNIoT1234'))
 
     time.sleep(0.5)
