@@ -30,7 +30,7 @@ data = '''{"seriesRef":
 resp = requests.post(url, data=data, headers=headers, auth=('iot_demo', 'SNIoT1234'))
 
 data2 = '''{"seriesRef":
-{"subject":"2b1b9c15db686b00c58f7a6eaf9619aa",
+{"subject":"1a8ed349dba46b00c58f7a6eaf9619e1",
 "table":"x_snc_ma_maint_u_cmdb_ci_machine",
 "metric":"motor_speed"},
 "values":[
@@ -52,7 +52,7 @@ data = '''{"seriesRef":
 resp = requests.post(url, data=data, headers=headers, auth=('iot_demo', 'SNIoT1234'))
 
 data2 = '''{"seriesRef":
-{"subject":"1a8ed349dba46b00c58f7a6eaf9619e1",
+{"subject":"2b1b9c15db686b00c58f7a6eaf9619aa",
 "table":"x_snc_ma_maint_u_cmdb_ci_machine",
 "metric":"motor_speed"},
 "values":[
