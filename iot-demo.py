@@ -101,13 +101,15 @@ while(1):
         windValueArray.append(value)
         windAvg = mean(windValueArray)
 
-        if len(valueArray) == numberOfReadings:
-            valueArray.pop(0)
+        if len(windValueArray) == numberOfReadings:
+            windValueArray.pop(0)
 
 
         control = pid(value)
         motorValueArray.append(control)
         motorAvg = mean(motorValueArray)
+        if len(motorValueArray) == numberOfReadings:
+            motorValueArray.pop(0)
         speedControl.ChangeDutyCycle(control)
 
     if minutePassed():
